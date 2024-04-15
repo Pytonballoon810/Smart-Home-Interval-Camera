@@ -1,5 +1,18 @@
 #include <WiFi.h>
 #include "esp_camera.h"
+#include <HTTPClient.h>
+#include <FS.h>
+
+// WiFi credentials
+const char* ssid = "your-ssid";
+const char* password = "your-password";
+
+// Server details
+const char* serverUrl = "http://your-server-url/upload"; // Change this to your server URL
+const char* uploadFileName = "image.jpg"; // Change this to the name you want to use for the uploaded image file
+
+// Cron time format: minute hour day month day_of_week
+const char* cronTime = "0 15 * * *"; // Take picture every day at 15:00
 
 // Camera configuration
 #define CAMERA_MODEL_AI_THINKER
@@ -24,6 +37,15 @@ camera_config_t config;
 
 void setup() {
   Serial.begin(115200);
+
+  // Connect to WiFi
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
+  }
+
+  Serial.println("WiFi connected");
 
   // Initialize camera
   config.ledc_channel = LEDC_CHANNEL_0;
@@ -75,8 +97,12 @@ void loop() {
     return;
   }
 
-  // Check if it's 3pm
-  if (timeinfo.tm_hour == 15 && timeinfo.tm_min == 0 && timeinfo.tm_sec == 0) {
+  // Parse cron time format
+  int cronMinute, cronHour;
+  sscanf(cronTime, "%d %d", &cronMinute, &cronHour);
+
+  // Check if it's time to take picture
+  if (timeinfo.tm_min == cronMinute && timeinfo.tm_hour == cronHour) {
     // Capture image
     camera_fb_t *fb = esp_camera_fb_get();
     if (!fb) {
@@ -84,6 +110,9 @@ void loop() {
       delay(1000);
       return;
     }
+
+    // Save image to SD card
+    saveImageToSD(fb);
 
     // Send image to server
     sendImageToServer(fb);
@@ -96,6 +125,43 @@ void loop() {
 }
 
 void sendImageToServer(camera_fb_t *fb) {
-  // Code to send image to server goes here
-  // You can use HTTPClient or other libraries to send the image
+  // Create HTTPClient object
+  HTTPClient http;
+
+  // Start HTTPClient with server URL
+  http.begin(serverUrl);
+
+  // Set header content type
+  http.addHeader("Content-Type", "image/jpeg");
+
+  // Send image data as binary body
+  http.POST((uint8_t*)fb->buf, fb->len);
+
+  // End HTTPClient
+  http.end();
+
+  Serial.println("Image sent to server");
+}
+
+void saveImageToSD(camera_fb_t *fb) {
+  // Mount SPIFFS/LittleFS filesystem
+  if (!SPIFFS.begin(true)) {
+    Serial.println("Failed to mount filesystem");
+    return;
+  }
+
+  // Open file for writing
+  File file = SPIFFS.open(uploadFileName, FILE_WRITE);
+  if (!file) {
+    Serial.println("Failed to open file for writing");
+    return;
+  }
+
+  // Write image data to file
+  file.write(fb->buf, fb->len);
+
+  // Close the file
+  file.close();
+
+  Serial.println("Image saved to SD card");
 }
