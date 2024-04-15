@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 Camera</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img id="camera-image" src="" alt="Camera Image">
+    <button id="toggle-mode-btn">Toggle Mode</button>
+  </div>
+
+  <script>
+    var isLiveMode = false;
+
+    function toggleMode() {
+      isLiveMode = !isLiveMode;
+      var buttonText = isLiveMode ? 'Switch to Latest View' : 'Switch to Live Mode';
+      document.getElementById('toggle-mode-btn').textContent = buttonText;
+
+      if (isLiveMode) {
+        // Switch to live mode
+        document.getElementById('camera-image').src = 'live-stream-url'; // Replace 'live-stream-url' with your live stream URL
+      } else {
+        // Fetch and display latest image
+        showLatestImage();
+      }
+    }
+
+    function showLatestImage() {
+      fetch('/latest-image')
+        .then(response => response.blob())
+        .then(blob => {
+          document.getElementById('camera-image').src = URL.createObjectURL(blob);
+        });
+    }
+
+    document.getElementById('toggle-mode-btn').addEventListener('click', toggleMode);
+    showLatestImage(); // Display latest image initially
+  </script>
+</body>
+</html>

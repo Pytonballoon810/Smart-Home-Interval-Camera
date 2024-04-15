@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Image Uploader</h1>
+    </div>
+    <div class="content" id="content">
+        <h2>Existing Folders</h2>
+        <form action="/create_videos" method="post" id="createVideosForm">
+            {% for folder in folders %}
+                <label class="checkbox-container">{{ folder }}
+                    <input type="checkbox" name="folders[]" value="{{ folder }}">
+                    <span class="checkmark"></span>
+                </label><br>
+            {% endfor %}
+            <button type="submit" class="button">Create Videos</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
