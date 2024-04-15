@@ -1,9 +1,5 @@
 #include <WiFi.h>
-#include <ESPAsyncWebServer.h>
 #include "esp_camera.h"
-#include "SPIFFS.h"
-
-AsyncWebServer server(80);
 
 // Camera configuration
 #define CAMERA_MODEL_AI_THINKER
@@ -28,12 +24,6 @@ camera_config_t config;
 
 void setup() {
   Serial.begin(115200);
-
-  // Initialize SPIFFS
-  if (!SPIFFS.begin(true)) {
-    Serial.println("SPIFFS initialization failed");
-    return;
-  }
 
   // Initialize camera
   config.ledc_channel = LEDC_CHANNEL_0;
@@ -74,83 +64,38 @@ void setup() {
     Serial.printf("Camera init failed with error 0x%x", err);
     return;
   }
-
-  // Connect to WiFi
-  WiFi.begin("your-ssid", "your-password");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi...");
-  }
-
-  // Set up routes
-  server.on("/", HTTP_GET, handleRoot);
-  server.on("/latest-image", HTTP_GET, handleLatestImage);
-  server.on("/live-mode", HTTP_GET, handleLiveMode);
-  server.begin();
 }
 
 void loop() {
-  // Capture and save image
-  captureImage();
-
-  delay(60000); // Capture image every 1 minute
-}
-
-void captureImage() {
-  Serial.println("Capturing image...");
-  camera_fb_t *fb = esp_camera_fb_get();
-  if (!fb) {
-    Serial.println("Camera capture failed");
+  // Get current time
+  struct tm timeinfo;
+  if (!getLocalTime(&timeinfo)) {
+    Serial.println("Failed to obtain time");
+    delay(1000);
     return;
   }
 
-  // Save image to SPIFFS
-  char filename[32];
-  sprintf(filename, "/image%d.jpg", millis());
-  File file = SPIFFS.open(filename, FILE_WRITE);
-  if (!file) {
-    Serial.println("Failed to open file for writing");
-    return;
-  }
-  file.write(fb->buf, fb->len);
-  file.close();
-  esp_camera_fb_return(fb);
-  Serial.println("Image captured and saved");
-}
-
-void handleRoot(AsyncWebServerRequest *request) {
-  request->send(SPIFFS, "/index.html", "text/html");
-}
-
-void handleLatestImage(AsyncWebServerRequest *request) {
-  // Serve latest image
-  Serial.println("Serving latest image");
-  File file = findLatestImage();
-  if (!file) {
-    request->send(404);
-    return;
-  }
-  request->send(SPIFFS, file.name(), "image/jpeg");
-}
-
-void handleLiveMode(AsyncWebServerRequest *request) {
-  // Enable live mode
-  // Implement logic to switch to live mode
-}
-
-File findLatestImage() {
-  File root = SPIFFS.open("/");
-  File latestFile;
-  time_t latestTime = 0;
-
-  while (File file = root.openNextFile()) {
-    if (!file.isDirectory() && file.name()[1] == 'i' && file.name()[2] == 'm' && file.name()[3] == 'a' && file.name()[4] == 'g' && file.name()[5] == 'e') {
-      time_t fileTime = atol(file.name() + 6);
-      if (fileTime > latestTime) {
-        latestTime = fileTime;
-        latestFile = file;
-      }
+  // Check if it's 3pm
+  if (timeinfo.tm_hour == 15 && timeinfo.tm_min == 0 && timeinfo.tm_sec == 0) {
+    // Capture image
+    camera_fb_t *fb = esp_camera_fb_get();
+    if (!fb) {
+      Serial.println("Camera capture failed");
+      delay(1000);
+      return;
     }
+
+    // Send image to server
+    sendImageToServer(fb);
+
+    // Free camera framebuffer
+    esp_camera_fb_return(fb);
   }
-  return latestFile;
+
+  delay(1000); // Check time every second
+}
+
+void sendImageToServer(camera_fb_t *fb) {
+  // Code to send image to server goes here
+  // You can use HTTPClient or other libraries to send the image
 }
