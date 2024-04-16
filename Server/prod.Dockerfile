@@ -4,8 +4,8 @@ ARG PGID
 ARG PUID
 
 # Create a user and group with specified IDs
-RUN addgroup --gid $PGID mygroup && \
-    adduser --uid $PUID --ingroup mygroup --home /app --disabled-password --gecos "" myuser
+RUN addgroup --gid $PGID mygroup
+RUN adduser --uid $PUID --ingroup mygroup --home /app --disabled-password --gecos "" myuser
 
 # Set the working directory
 WORKDIR /app
