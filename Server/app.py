@@ -188,7 +188,7 @@ def main():
     It starts the application by running the Flask app on the specified host and port.
     """
     debug_print("Starting application...")
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=80)
 
 if __name__ == '__main__':
     main()
