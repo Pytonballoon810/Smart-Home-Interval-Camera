@@ -1,11 +1,13 @@
 #include <WiFi.h>
 #include "esp_camera.h"
 #include <HTTPClient.h>
-#include <FS.h>
+#include <SPI.h>
+#include <SD.h>
+#include "secrets.h"
 
 // WiFi credentials
-const char* ssid = "your-ssid";
-const char* password = "your-password";
+const char* ssid = wifi_ssid;
+const char* password = wifi_password;
 
 // Server details
 const char* serverUrl = "http://your-server-url/upload"; // Change this to your server URL
@@ -86,6 +88,12 @@ void setup() {
     Serial.printf("Camera init failed with error 0x%x", err);
     return;
   }
+
+  // Initialize SD card
+  if (!SD.begin()) {
+    Serial.println("Failed to initialize SD card");
+    return;
+  }
 }
 
 void loop() {
@@ -124,6 +132,23 @@ void loop() {
   delay(1000); // Check time every second
 }
 
+void saveImageToSD(camera_fb_t *fb) {
+  // Open file on SD card
+  File file = SD.open(uploadFileName, FILE_WRITE);
+  if (!file) {
+    Serial.println("Failed to open file on SD card");
+    return;
+  }
+
+  // Write image data to file
+  file.write(fb->buf, fb->len);
+
+  // Close file
+  file.close();
+
+  Serial.println("Image saved to SD card");
+}
+
 void sendImageToServer(camera_fb_t *fb) {
   // Create HTTPClient object
   HTTPClient http;
@@ -141,27 +166,4 @@ void sendImageToServer(camera_fb_t *fb) {
   http.end();
 
   Serial.println("Image sent to server");
-}
-
-void saveImageToSD(camera_fb_t *fb) {
-  // Mount SPIFFS/LittleFS filesystem
-  if (!SPIFFS.begin(true)) {
-    Serial.println("Failed to mount filesystem");
-    return;
-  }
-
-  // Open file for writing
-  File file = SPIFFS.open(uploadFileName, FILE_WRITE);
-  if (!file) {
-    Serial.println("Failed to open file for writing");
-    return;
-  }
-
-  // Write image data to file
-  file.write(fb->buf, fb->len);
-
-  // Close the file
-  file.close();
-
-  Serial.println("Image saved to SD card");
 }
