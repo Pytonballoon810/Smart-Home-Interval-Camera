@@ -1,0 +1,12 @@
+
+
+[0m[1m[33mWARNING[0m[33m: package deprecated!
+
+[0m[33m  The 'esp32-hal' package has been deprecated in favour of 'esp-hal'.
+
+[0m[33m  Please refer to the migration guide for help with updating your projects
+[0m[33m  to use the new 'esp-hal' package:
+
+[0m[33m  https://github.com/esp-rs/esp-hal/releases/tag/v0.16.0
+
+[0m

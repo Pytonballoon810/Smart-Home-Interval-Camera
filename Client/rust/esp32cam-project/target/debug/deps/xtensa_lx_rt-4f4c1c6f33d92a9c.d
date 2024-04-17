@@ -1,0 +1,12 @@
+d:\Documents\HomeLab\Smart-Home-Interval-Camera\Client\rust\esp32cam-project\target\debug\deps\libxtensa_lx_rt-4f4c1c6f33d92a9c.rmeta: C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\lib.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\exception.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\exception\assembly_esp32.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\exception\esp32.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\interrupt.rs d:\Documents\HomeLab\Smart-Home-Interval-Camera\Client\rust\esp32cam-project\target\debug\build\xtensa-lx-rt-2b9aea8f418b957a\out/interrupt_level_masks.rs
+
+d:\Documents\HomeLab\Smart-Home-Interval-Camera\Client\rust\esp32cam-project\target\debug\deps\xtensa_lx_rt-4f4c1c6f33d92a9c.d: C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\lib.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\exception.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\exception\assembly_esp32.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\exception\esp32.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\interrupt.rs d:\Documents\HomeLab\Smart-Home-Interval-Camera\Client\rust\esp32cam-project\target\debug\build\xtensa-lx-rt-2b9aea8f418b957a\out/interrupt_level_masks.rs
+
+C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\lib.rs:
+C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\exception.rs:
+C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\exception\assembly_esp32.rs:
+C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\exception\esp32.rs:
+C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\xtensa-lx-rt-0.16.0\src\interrupt.rs:
+d:\Documents\HomeLab\Smart-Home-Interval-Camera\Client\rust\esp32cam-project\target\debug\build\xtensa-lx-rt-2b9aea8f418b957a\out/interrupt_level_masks.rs:
+
+# env-dep:OUT_DIR=d:\\Documents\\HomeLab\\Smart-Home-Interval-Camera\\Client\\rust\\esp32cam-project\\target\\debug\\build\\xtensa-lx-rt-2b9aea8f418b957a\\out

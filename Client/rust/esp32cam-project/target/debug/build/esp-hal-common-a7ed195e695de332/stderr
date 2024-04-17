@@ -1,0 +1,2 @@
+Invalid data: (Some("BLOCK1"), Some("1"), Some(0), None, Some("[ENCRYPT_FLASH_KEY] Flash encryption key"))
+Invalid data: (Some("BLOCK2"), Some("2"), Some(0), None, Some("[SECURE_BOOT_KEY] Security boot key"))
