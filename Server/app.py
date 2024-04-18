@@ -5,8 +5,8 @@ This module contains code for setting up a web server on an ESP32 device
 to control a smart camera. It allows users to configure the camera settings,
 view the last captured image, and upload new images to the server.
 
-Author: [Your Name]
-Date: [Date]
+Author: Philipp Hofmann
+Date: 18/4/2014
 """
 
 import os
@@ -17,7 +17,7 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = '/mounted_directory'
+UPLOAD_FOLDER = '/upload'
 
 DEBUG_MSG = os.getenv("DEBUG_MSG", "False").lower() == "true"
 
