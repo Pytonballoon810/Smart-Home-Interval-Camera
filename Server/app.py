@@ -38,6 +38,10 @@ def debug_print(message):
 def index():
     return app.send_static_file('index.html')
 
+@app.route('/favicon.ico', methods=['GET'])
+def favicon():
+    return app.send_static_file('icons/favicon.ico')
+
 @app.route('/api/get-clients', methods=['GET'])
 def get_clients():
     """
