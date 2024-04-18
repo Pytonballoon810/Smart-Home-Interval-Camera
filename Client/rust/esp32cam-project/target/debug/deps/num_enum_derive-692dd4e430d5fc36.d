@@ -1,9 +1,0 @@
-D:\Documents\HomeLab\Smart-Home-Interval-Camera\Client\rust\esp32cam-project\target\debug\deps\num_enum_derive-692dd4e430d5fc36.dll: C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\lib.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\enum_attributes.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\parsing.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\utils.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\variant_attributes.rs
-
-D:\Documents\HomeLab\Smart-Home-Interval-Camera\Client\rust\esp32cam-project\target\debug\deps\num_enum_derive-692dd4e430d5fc36.d: C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\lib.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\enum_attributes.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\parsing.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\utils.rs C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\variant_attributes.rs
-
-C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\lib.rs:
-C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\enum_attributes.rs:
-C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\parsing.rs:
-C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\utils.rs:
-C:\Users\Philipp\.cargo\registry\src\index.crates.io-6f17d22bba15001f\num_enum_derive-0.7.2\src\variant_attributes.rs:
