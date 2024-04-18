@@ -16,7 +16,7 @@ import uuid
 import shutil
 from flask import Flask, request, jsonify, render_template, send_from_directory, redirect, url_for
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='')
 
 UPLOAD_FOLDER = '/upload'
 
