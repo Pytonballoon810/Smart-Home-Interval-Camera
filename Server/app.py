@@ -40,7 +40,7 @@ def index():
 
 @app.route('/favicon.ico', methods=['GET'])
 def favicon():
-    return app.send_static_file('icons/favicon.ico')
+    return app.send_static_file('icons/favicon.png')
 
 @app.route('/api/get-clients', methods=['GET'])
 def get_clients():
