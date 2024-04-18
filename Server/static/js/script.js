@@ -11,7 +11,12 @@ fetch("/api/get-clients")
     for (const item of clients) {
       // Create a new div for each item
       const gridItem = document.createElement("div");
-      gridItem.textContent = item;
+      const span = document.createElement("span");
+      const img = document.createElement("img");
+      span.innerText = item;
+      img.src = `/icons/folder.png`;
+      gridItem.appendChild(span);
+      gridItem.appendChild(img);
 
       // Add the item to the grid container
       gridContainer.appendChild(gridItem);

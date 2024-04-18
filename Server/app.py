@@ -10,15 +10,18 @@ Date: 18/4/2014
 """
 
 import os
-import subprocess
 import zipfile
-import uuid
-import shutil
-from flask import Flask, request, jsonify, render_template, send_from_directory, redirect, url_for
+import platform
+from flask import Flask, request, jsonify
+
+print(os.getcwd())
 
 app = Flask(__name__, static_folder='static', static_url_path='')
 
-UPLOAD_FOLDER = '/upload'
+if platform.node() in ["Philipp-Laptop"]:
+    UPLOAD_FOLDER = 'Server/test'
+else:
+    UPLOAD_FOLDER = '/upload'
 
 DEBUG_MSG = os.getenv("DEBUG_MSG", "False").lower() == "true"
 
