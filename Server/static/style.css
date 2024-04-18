@@ -2,6 +2,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    -webkit-user-select: none;  /* Chrome, Safari and Opera */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE/Edge */
+    user-select: none;          /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 .header {
@@ -95,4 +99,31 @@ body {
 }
 .dragover {
     border: 2px dashed #007bff;
+}
+.folder-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.folder-icon {
+    position: relative;
+    width: 30px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.folder-icon::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('path/to/your/folder-icon.png');
+    background-size: cover;
+}
+
+.folder-icon input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    right: 0;
 }

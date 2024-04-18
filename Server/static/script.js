@@ -14,6 +14,16 @@ document.addEventListener('mousedown', (event) => {
     }
 });
 
+document.addEventListener('mousedown', (event) => {
+    const items = document.querySelectorAll('.checkbox-container.selected');
+
+    items.forEach((item) => {
+        if (!item.contains(event.target)) {
+            item.classList.remove('selected');
+        }
+    });
+});
+
 document.addEventListener('mousemove', (event) => {
     if (selectionBox !== null) {
         const currentX = event.clientX;
@@ -100,3 +110,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+setInterval(() => {
+    fetch('/get_folders')
+        .then(response => response.json())
+        .then(folders => {
+            // Clear the current list of folders
+            const folderList = document.getElementById('folderList');
+            folderList.innerHTML = '';
+
+            // Add the new folders to the list
+            for (const folder of folders) {
+                const listItem = document.createElement('li');
+                listItem.textContent = folder;
+                folderList.appendChild(listItem);
+            }
+        });
+}, 5000);  // Repeat every 5 seconds

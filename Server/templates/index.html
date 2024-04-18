@@ -14,12 +14,25 @@
         <h2>Existing Folders</h2>
         <form action="/create_videos" method="post" id="createVideosForm">
             {% for folder in folders %}
-                <label class="checkbox-container">{{ folder }}
-                    <input type="checkbox" name="folders[]" value="{{ folder }}">
-                    <span class="checkmark"></span>
-                </label><br>
+                <div class="folder-container">
+                    <div class="folder-icon">
+                        <input type="checkbox" name="folders[]" value="{{ folder }}">
+                    </div>
+                    <label>{{ folder }}</label>
+                </div>
             {% endfor %}
             <button type="submit" class="button">Create Videos</button>
+        </form>
+        <form action="/delete_folders" method="post" id="deleteFoldersForm">
+            {% for folder in folders %}
+                <div class="folder-container">
+                    <div class="folder-icon">
+                        <input type="checkbox" name="folders[]" value="{{ folder }}">
+                    </div>
+                    <label>{{ folder }}</label>
+                </div>
+            {% endfor %}
+            <button type="submit" class="button">Delete Selected Folders</button>
         </form>
     </div>
 

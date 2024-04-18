@@ -13,7 +13,8 @@ import os
 import subprocess
 import zipfile
 import uuid
-from flask import Flask, request, jsonify, render_template, send_from_directory
+import shutil
+from flask import Flask, request, jsonify, render_template, send_from_directory, redirect, url_for
 
 app = Flask(__name__)
 
@@ -32,6 +33,20 @@ def debug_print(message):
     """
     if DEBUG_MSG:
         print(f"\033[94m[DEBUG]\033[0m {message}")
+
+@app.route('/get_folders', methods=['GET'])
+def get_folders():
+    folders = os.listdir(UPLOAD_FOLDER)
+    return jsonify(folders)
+
+@app.route('/delete_folders', methods=['POST'])
+def delete_folders():
+    folders = request.form.getlist('folders[]')
+    for folder in folders:
+        folder_path = os.path.join('path/to/your/folders', folder)
+        if os.path.exists(folder_path):
+            shutil.rmtree(folder_path)
+    return redirect(url_for('index'))
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
