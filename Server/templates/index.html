@@ -7,33 +7,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div id="contextMenu" class="context-menu">
+        <ul>
+            <li id="deleteOption">Delete Folder(s)</li>
+            <li id="renderOption">Create Rendering</li>
+        </ul>
+    </div>
     <div class="header">
         <h1>Image Uploader</h1>
     </div>
     <div class="content" id="content">
         <h2>Existing Folders</h2>
-        <form action="/create_videos" method="post" id="createVideosForm">
+        <div class="folder-grid">
             {% for folder in folders %}
                 <div class="folder-container">
                     <div class="folder-icon">
                         <input type="checkbox" name="folders[]" value="{{ folder }}">
                     </div>
-                    <label>{{ folder }}</label>
+                    <a href="/view/{{ folder }}"><label>{{ folder }}</label></a>
                 </div>
             {% endfor %}
-            <button type="submit" class="button">Create Videos</button>
-        </form>
-        <form action="/delete_folders" method="post" id="deleteFoldersForm">
-            {% for folder in folders %}
-                <div class="folder-container">
-                    <div class="folder-icon">
-                        <input type="checkbox" name="folders[]" value="{{ folder }}">
-                    </div>
-                    <label>{{ folder }}</label>
-                </div>
-            {% endfor %}
-            <button type="submit" class="button">Delete Selected Folders</button>
-        </form>
+        </div>
+        <button id="deleteButton" class="button">Delete Selected Folders</button>
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>

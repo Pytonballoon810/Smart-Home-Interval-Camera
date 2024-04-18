@@ -111,19 +111,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-setInterval(() => {
-    fetch('/get_folders')
-        .then(response => response.json())
-        .then(folders => {
-            // Clear the current list of folders
-            const folderList = document.getElementById('folderList');
-            folderList.innerHTML = '';
+document.getElementById('backButton').addEventListener('click', () => {
+    window.history.back();
+});
 
-            // Add the new folders to the list
-            for (const folder of folders) {
-                const listItem = document.createElement('li');
-                listItem.textContent = folder;
-                folderList.appendChild(listItem);
-            }
-        });
-}, 5000);  // Repeat every 5 seconds
+document.getElementById('deleteButton').addEventListener('click', () => {
+    const selectedFolders = Array.from(document.querySelectorAll('.folder-container input:checked'))
+        .map(input => input.value);
+
+    fetch('/delete_folders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedFolders),
+    })
+    .then(response => {
+        if (response.ok) {
+            // Refresh the page to show the updated list of folders
+            location.reload();
+        } else {
+            console.error('Failed to delete folders');
+        }
+    });
+});
+
+const contextMenu = document.getElementById('contextMenu');
+const deleteOption = document.getElementById('deleteOption');
+const renderOption = document.getElementById('renderOption');
+let rightClickedFolder = null;
+
+document.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+
+    // Get the folder that was right-clicked
+    rightClickedFolder = event.target.closest('.folder-container');
+
+    // Show the context menu
+    contextMenu.style.display = 'block';
+    contextMenu.style.left = `${event.pageX}px`;
+    contextMenu.style.top = `${event.pageY}px`;
+});
+
+document.addEventListener('click', () => {
+    // Hide the context menu
+    contextMenu.style.display = 'none';
+});
+
+deleteOption.addEventListener('click', () => {
+    // Delete the right-clicked folder or the selected folders
+});
+
+renderOption.addEventListener('click', () => {
+    // Create a rendering of the right-clicked folder or the selected folders
+});

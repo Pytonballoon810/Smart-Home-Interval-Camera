@@ -118,7 +118,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('path/to/your/folder-icon.png');
+    background-image: url('/icons/folder.png');
     background-size: cover;
 }
 
@@ -126,4 +126,26 @@ body {
     position: absolute;
     top: 0;
     right: 0;
+}
+.folder-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.context-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.context-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.context-menu li {
+    padding: 10px;
+    cursor: pointer;
 }
